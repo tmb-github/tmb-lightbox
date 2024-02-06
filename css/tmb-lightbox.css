@@ -1,0 +1,221 @@
+/*
+Utilized by appendToCss() functions in the JavaScript
+*/
+:root {
+    --cloned-image-scale: 1;
+    --cloned-image-object-position: 50% 50%;
+    --lightbox-wrapper-animation-delay: 0s;
+    --lightbox-wrapper-visibility: hidden;
+    --document-scroll-height: 0;
+}
+
+/* 
+Arbitrary styling for sample images on this page; these classes are not
+needed as hooks in the JavaScript, and may be changed for the page and 
+site employing the tmb-lightbox.
+*/
+
+*, html, body {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+h1, figcaption {
+    text-align: center;
+    padding-top: .5em;
+}
+
+.outer-wrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100%;
+    padding: 1em 0;
+    width: 100%;
+}
+
+.image-wrapper .image-item {
+    cursor: pointer;
+    height: 35vh;
+    margin-bottom: 1em;
+    overflow: hidden;
+    width: 48%;
+}
+
+.image-wrapper .image-item img {
+    height: 100%;
+    object-fit: cover;
+    transition: all .3s ease-in-out;
+    width: 100%;
+}
+
+.screen-reader {
+    border: 0;
+    clip: rect(0,0,0,0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+/*
+Classes needed for styling the tmb-lightbox content, and as hooks for the
+JavaScript (i.e., class names must be preserved):
+*/
+
+.tmb-lightbox-source {
+    cursor: pointer;
+}
+
+.tmb-lightbox-wrapper .cloned-image {
+    transform: scale(var(--cloned-image-scale));
+    object-position: var(--cloned-image-object-position);
+    touch-action: none;
+}
+
+.tmb-lightbox-wrapper {
+    align-items: center;
+    animation: fade-out .8s ease-in-out forwards;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    opacity: 1;
+    overflow: hidden;
+    position: fixed;
+    visibility: var(--lightbox-wrapper-visibility);
+    width: 100vw;
+    z-index: 10001;
+    top: 0;
+    left: 0;
+}
+
+.tmb-lightbox-wrapper.show {
+    animation: fade .8s ease-in-out forwards;
+    opacity: 1;
+}
+
+.body:has(.tmb-lightbox-wrapper.show) .tmb-lightbox-backdrop {
+    background-color: #2929299c;
+    height: var(--document-scroll-height);
+    position: absolute;
+    width: 100%;
+    z-index: 10000;
+}
+
+.tmb-lightbox-wrapper a:link.tmb-lightbox-negative-space {
+    background-color: transparent;
+    height: var(--document-scroll-height);
+    position: absolute;
+    width: 100%;
+    z-index: 10001;
+}
+
+
+.tmb-lightbox-wrapper .tmb-lightbox-content {
+    background-color: #272727;
+    border:1px solid #3e3e3e;
+    box-shadow: 0px 0px 7px #525252;
+    display: flex;
+    max-height: 95%;
+    min-height: 80%;
+    overflow: hidden;
+    width: 80%;
+    z-index: 10001;
+    position: relative;
+    left: var(--lightbox-left);
+    top: var(--lightbox-top);
+    transform: scale(var(--lightbox-scale));
+}
+
+@media (max-width:480px) {
+    .tmb-lightbox-wrapper .tmb-lightbox-content {
+        height: 95%;
+        width: 95%;
+    }
+}
+
+.tmb-lightbox-wrapper .tmb-lightbox-viewer {
+    background-color: #000;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: calc(100% - 45px);
+}
+
+.tmb-lightbox-wrapper .tmb-lightbox-viewer > img {
+    height: 100%;
+    object-fit: scale-down;
+    position: relative;
+    transition: transform .3s ease-in-out;
+    width: 100%;
+}
+
+.tmb-lightbox-wrapper .tmb-lightbox-viewer > img[data-draggable] {
+    cursor: grab;
+}
+
+.tmb-lightbox-wrapper .tmb-lightbox-buttons {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 45px;
+}
+
+.tmb-lightbox-wrapper .tmb-lightbox-buttons > a {
+    align-items: center;
+    color: #c9c9c9;
+    display: flex;
+    height: 36px;
+    justify-content: center;
+    margin: 5px;
+    text-decoration: none;
+    width: 36px;
+}
+
+
+.tmb-lightbox-source:focus-visible img {
+    outline: 3px solid var(--anchor-underline-color);
+    outline-style: auto;
+}
+
+.tmb-lightbox-wrapper .tmb-lightbox-buttons > a:hover {
+    background-color: #f5f5f533;
+}
+
+.tmb-lightbox-wrapper .tmb-lightbox-buttons > a[disabled] {
+    color:#838383;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+@keyframes fade {
+    0%{
+        opacity: 0;
+        transform: translateY(-1000px);
+        transform: scale(0);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+        transform: scale(1);
+    }
+}
+
+@keyframes fade-out {
+    0%{
+        opacity: 1;
+        transform: translateY(0);
+        transform: scale(1);
+    }
+    100%{
+        opacity: 0;
+        transform: translateY(-1000px);
+        transform: scale(0);
+    }
+}

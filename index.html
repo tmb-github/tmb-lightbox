@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset=utf-8>
+<title>TMB Lightbox</title>
+<meta name=description content="Lightbox Demo, based on https://www.sourcecodester.com/tutorial/javascript/16284/image-popupoverlay-viewer-zoom-and-out-using-css-and-javascript">
+<meta name=viewport content="width=device-width, initial-scale=1.0">
+<link rel=stylesheet type="text/css" href="css/tmb-lightbox.css">
+</head>
+<body class=body>
+<div class="active tmb-lightbox-backdrop"></div>
+<h1>TMB Lightbox</h1>
+    <section class="tmb-lightbox-wrapper" aria-labelledby=lightbox-heading-heading>
+        <h2 class="screen-reader" id=lightbox-heading-heading>Lightbox</h2>
+        <a href="#" class="tmb-lightbox-negative-space no-border-bottom" tabindex=-1><span class=screen-reader>overlay</span></a>
+        <div class="tmb-lightbox-content">
+            <div class="tmb-lightbox-viewer"></div>
+            <div class="tmb-lightbox-buttons">
+                <a href="#" class="tmb-lightbox-close-btn no-border-bottom" tabindex=-1>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF" role=img aria-labelledby=svg-close-icon-title aria-describedby=svg-close-icon-desc>
+                        <title id=svg-close-icon-title>close</title>
+                        <desc id=svg-close-icon-desc>x symbol</desc>
+                        <path d="M0 0h24v24H0V0z" fill="none"></path>
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path>
+                    </svg>
+                </a>
+                <a href="#" class="tmb-lightbox-zoom-in-btn no-border-bottom" tabindex=-1>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" fill="#FFFFFF" viewBox="0 -960 960 960" role=img aria-labelledby=svg-zoom-in-icon-title aria-describedby=svg-zoom-in-icon-desc>
+                        <title id=svg-zoom-in-icon-title>zoom in</title>
+                        <desc id=svg-zoom-in-icon-desc>plus symbol | increase magnification</desc>
+                        <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"></path>
+                    </svg>
+                </a>
+                <a href="#" class="tmb-lightbox-zoom-out-btn no-border-bottom" tabindex=-1>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" viewBox="0 -960 960 960" fill="#FFFFFF" role=img aria-labelledby=svg-zoom-out-icon-title aria-describedby=svg-zoom-out-icon-desc>
+                        <title id=svg-zoom-out-icon-title>zoom out</title>
+                        <desc id=svg-zoom-out-icon-desc>minus sign | decrease magnification</desc>
+                        <path d="M200-440v-80h560v80H200Z"></path>
+                    </svg>
+                </a>
+                <a href="#" class="tmb-lightbox-zoom-reset-btn no-border-bottom" tabindex=-1>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 -960 960 960" fill="#FFFFFF" role=img aria-labelledby=svg-zoom-reset-icon-title aria-describedby=svg-zoom-reset-icon-desc>
+                        <title id=svg-zoom-reset-icon-title>zoom reset</title>
+                        <desc id=svg-zoom-reset-icon-desc>inward pointing arrows | restore original size and position</desc>
+                        <path d="m166.001-123.848-42.153-42.153 134.001-134H140.001V-360H360v219.999h-59.999v-117.848l-134 134.001Zm627.998 0-134-134.001v117.848H600V-360h219.999v59.999H702.151l134.001 134-42.153 42.153ZM140.001-600v-59.999h117.848l-134.001-134 42.153-42.153 134 134.001v-117.848H360V-600H140.001ZM600-600v-219.999h59.999v117.848l134-134.001 42.153 42.153-134.001 134h117.848V-600H600Z"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+<!-- 
+PICTURE element used here to illustrate that routine will work with it in
+addition to standard IMG elements (i.e., PICTURE element is not necessary for
+routine to work).
+-->
+    <section class="work-image outer-wrapper">
+        <h2 class=screen-reader>Jellyfish</h2>
+        <figure class="aspect-ratio image-wrapper">
+            <picture class="tmb-lightbox-source" tabindex=0>
+                <source srcset="images/jellyfish/jellyfish-536px.webp 536w, images/jellyfish/jellyfish-683px.webp 683w, images/jellyfish/jellyfish-780px.webp 780w, images/jellyfish/jellyfish-928px.webp 928w, images/jellyfish/jellyfish-1072px.webp 1072w, images/jellyfish/jellyfish-1600px.webp 1600w" type="image/webp" sizes="(max-width: 760px) calc(90vw - 4em), (min-width: 760px) calc(45vw - 4.5em - 17px), calc(90vw - 4em)">
+                <source srcset="images/jellyfish/jellyfish-536px.jpg 536w, images/jellyfish/jellyfish-683px.jpg 683w, images/jellyfish/jellyfish-780px.jpg 780w, images/jellyfish/jellyfish-928px.jpg 928w, images/jellyfish/jellyfish-1072px.jpg 1072w, images/jellyfish/jellyfish-1600px.jpg 1600w" type="image/jpeg" sizes="(max-width: 760px) calc(90vw - 4em), (min-width: 760px) calc(45vw - 4.5em - 17px), calc(90vw - 4em)">
+                <img src="images/jellyfish/jellyfish-1600px.jpg" alt="Jellyfish">
+            </picture>
+            <figcaption>Click Image for Lightbox Display</figcaption>
+        </figure>
+    </section>
+    <section class="work-image outer-wrapper">
+        <h2 class=screen-reader>Lake</h2>
+        <figure class="aspect-ratio image-wrapper">
+            <picture class="tmb-lightbox-source" tabindex=0>
+                <source srcset="images/lake/lake-536px.webp 536w, images/lake/lake-683px.webp 683w, images/lake/lake-780px.webp 780w, images/lake/lake-928px.webp 928w, images/lake/lake-1072px.webp 1072w, images/lake/lake-1600px.webp 1600w" type="image/webp" sizes="(max-width: 760px) calc(90vw - 4em), (min-width: 760px) calc(45vw - 4.5em - 17px), calc(90vw - 4em)">
+                <source srcset="images/lake/lake-536px.jpg 536w, images/lake/lake-683px.jpg 683w, images/lake/lake-780px.jpg 780w, images/lake/lake-928px.jpg 928w, images/lake/lake-1072px.jpg 1072w, images/lake/lake-1600px.jpg 1600w" type="image/jpeg" sizes="(max-width: 760px) calc(90vw - 4em), (min-width: 760px) calc(45vw - 4.5em - 17px), calc(90vw - 4em)">
+                <img src="images/lake/lake-1600px.jpg" alt="Lake">
+            </picture>
+            <figcaption>Click Image for Lightbox Display</figcaption>
+        </figure>
+    </section>
+    <section class="work-image outer-wrapper">
+        <h2 class=screen-reader>Moonrise</h2>
+        <figure class="aspect-ratio image-wrapper">
+            <picture class="tmb-lightbox-source" tabindex=0>
+                <source srcset="images/moonrise/moonrise-536px.webp 536w, images/moonrise/moonrise-683px.webp 683w, images/moonrise/moonrise-780px.webp 780w, images/moonrise/moonrise-928px.webp 928w, images/moonrise/moonrise-1072px.webp 1072w, images/moonrise/moonrise-1600px.webp 1600w" type="image/webp" sizes="(max-width: 760px) calc(90vw - 4em), (min-width: 760px) calc(45vw - 4.5em - 17px), calc(90vw - 4em)">
+                <source srcset="images/moonrise/moonrise-536px.jpg 536w, images/moonrise/moonrise-683px.jpg 683w, images/moonrise/moonrise-780px.jpg 780w, images/moonrise/moonrise-928px.jpg 928w, images/moonrise/moonrise-1072px.jpg 1072w, images/moonrise/moonrise-1600px.jpg 1600w" type="image/jpeg" sizes="(max-width: 760px) calc(90vw - 4em), (min-width: 760px) calc(45vw - 4.5em - 17px), calc(90vw - 4em)">
+                <img src="images/moonrise/moonrise-1600px.jpg" alt="Moonrise">
+            </picture>
+            <figcaption>Click Image for Lightbox Display</figcaption>
+        </figure>
+    </section>
+    <section class="work-image outer-wrapper">
+        <h2 class=screen-reader>Sunrise</h2>
+        <figure class="aspect-ratio image-wrapper">
+            <picture class="tmb-lightbox-source" tabindex=0>
+                <source srcset="images/sunrise/sunrise-536px.webp 536w, images/sunrise/sunrise-683px.webp 683w, images/sunrise/sunrise-780px.webp 780w, images/sunrise/sunrise-928px.webp 928w, images/sunrise/sunrise-1072px.webp 1072w, images/sunrise/sunrise-1600px.webp 1600w" type="image/webp" sizes="(max-width: 760px) calc(90vw - 4em), (min-width: 760px) calc(45vw - 4.5em - 17px), calc(90vw - 4em)">
+                <source srcset="images/sunrise/sunrise-536px.jpg 536w, images/sunrise/sunrise-683px.jpg 683w, images/sunrise/sunrise-780px.jpg 780w, images/sunrise/sunrise-928px.jpg 928w, images/sunrise/sunrise-1072px.jpg 1072w, images/sunrise/sunrise-1600px.jpg 1600w" type="image/jpeg" sizes="(max-width: 760px) calc(90vw - 4em), (min-width: 760px) calc(45vw - 4.5em - 17px), calc(90vw - 4em)">
+                <img src="images/sunrise/sunrise-1600px.jpg" alt="Sunrise">
+            </picture>
+            <figcaption>Click Image for Lightbox Display</figcaption>
+        </figure>
+    </section>
+    <section class="work-image outer-wrapper">
+        <h2 class=screen-reader>Cathedral</h2>
+        <figure class="aspect-ratio image-wrapper">
+            <picture class="tmb-lightbox-source" tabindex=0>
+                <source srcset="images/cathedral/cathedral-536px.webp 536w, images/cathedral/cathedral-683px.webp 683w, images/cathedral/cathedral-780px.webp 780w, images/cathedral/cathedral-928px.webp 928w, images/cathedral/cathedral-1072px.webp 1072w, images/cathedral/cathedral-1600px.webp 1600w" type="image/webp" sizes="(max-width: 760px) calc(90vw - 4em), (min-width: 760px) calc(45vw - 4.5em - 17px), calc(90vw - 4em)">
+                <source srcset="images/cathedral/cathedral-536px.jpg 536w, images/cathedral/cathedral-683px.jpg 683w, images/cathedral/cathedral-780px.jpg 780w, images/cathedral/cathedral-928px.jpg 928w, images/cathedral/cathedral-1072px.jpg 1072w, images/cathedral/cathedral-1600px.jpg 1600w" type="image/jpeg" sizes="(max-width: 760px) calc(90vw - 4em), (min-width: 760px) calc(45vw - 4.5em - 17px), calc(90vw - 4em)">
+                <img src="images/cathedral/cathedral-1600px.jpg" alt="Cathedral">
+            </picture>
+            <figcaption>Click Image for Lightbox Display</figcaption>
+        </figure>
+    </section>
+<script src="scripts/appendToCss.js" defer></script>
+<script src="scripts/tmbLightbox.js" defer></script>
+</body>
+</html>
